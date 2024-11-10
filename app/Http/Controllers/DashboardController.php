@@ -12,7 +12,8 @@ class DashboardController extends Controller
         try {
             return response()->json([
                 'success' => true,
-                'user' => auth()->user()
+                'nickname' => auth()->user()->name,
+                'avatar' => auth()->user()->avatar,
             ]);
         } catch (Exception $exception) {
             return response()->json([
