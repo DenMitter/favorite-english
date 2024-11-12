@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -36,10 +37,15 @@ Route::controller(AuthController::class)->group(function () {
         Route::post('auth/verification-notification', 'resendVerificationEmail')
             ->middleware('throttle:6,1')
             ->name('verification.send');
-
-        // Маршрути для особистого кабінету
-        Route::prefix('dashboard')->group(function () {
-            Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-        });
     });
+});
+
+// Маршрути для особистого кабінету
+Route::prefix('dashboard')->group(function () {
+    Route::post('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+});
+
+// Маршрути для особистого адмінки
+Route::prefix('admin')->group(function () {
+    Route::post('/', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 });
