@@ -26,10 +26,12 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'string|max:255',
-            'email' => 'string|email|max:255',
-            'password' => 'nullable|string|min:6|confirmed',
-            'roles' => 'nullable|array',
-            'roles.*' => 'integer|exists:roles,id',
+            'description' => 'string|max:255',
+            'price' => 'numeric|min:0',
+            'color' => 'string|max:255',
+            'image' => 'string|max:2048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|exists:tags,id',
         ];
     }
 

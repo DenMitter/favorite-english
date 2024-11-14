@@ -30,6 +30,8 @@ class StoreRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'color' => 'required|string|max:255',
             'image' => 'required|string|max:2048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|exists:tags,id',
         ];
     }
 
