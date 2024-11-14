@@ -15,4 +15,9 @@ class CourseService
             ->paginate(10, ['id', 'name'])
             ->withQueryString();
     }
+
+    public function store(array $data): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+    {
+        return Course::query()->create($data);
+    }
 }
