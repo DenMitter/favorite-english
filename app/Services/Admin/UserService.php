@@ -13,8 +13,13 @@ use Illuminate\Support\Str;
 
 class UserService
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-
+        return User::query()
+            ->with(['roles' => function ($query) {
+                $query->select('name');
+            }])
+            ->paginate(10, ['id', 'name', 'email', 'avatar'])
+            ->withQueryString();
     }
 }
