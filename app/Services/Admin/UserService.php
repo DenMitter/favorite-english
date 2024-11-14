@@ -28,4 +28,13 @@ class UserService
         $data['password'] = Hash::make($data['password']);
         return User::query()->create($data);
     }
+
+    public function show($id): \Illuminate\Database\Eloquent\Builder|array|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+    {
+        return User::query()
+            ->with(['roles' => function ($query) {
+                $query->select('name');
+            }])
+            ->findOrFail($id, ['id', 'name', 'email', 'avatar']);
+    }
 }

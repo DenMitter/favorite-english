@@ -62,9 +62,21 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): \Illuminate\Http\JsonResponse
     {
-        //
+        try {
+            $data = $this->userService->show($id);
+
+            return response()->json([
+                'success' => true,
+                'token' => $data
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 
     /**
