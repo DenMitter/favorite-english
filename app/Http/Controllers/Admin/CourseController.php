@@ -37,4 +37,24 @@ class CourseController extends Controller
             ], 400);
         }
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreRequest $request): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $data = $this->courseService->store($request->validated());
+
+            return response()->json([
+                'success' => true,
+                'data' => $data
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
 }
