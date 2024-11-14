@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -45,7 +47,27 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
 });
 
-// Маршрути для особистого адмінки
-Route::prefix('admin')->group(function () {
-    Route::post('/', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
+// Маршрути для адмінки
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+
+    // Головна сторінка адмінки
+    Route::post('/', [AdminController::class, 'index'])->name('admin.index');
+
+    // CRUD для користувачів
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index'); // Список користувачів
+    Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create'); // Форма для створення нового користувача
+    Route::post('/users', [UserController::class, 'store'])->name('admin.users.store'); // Збереження нового користувача
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('admin.users.show'); // Перегляд конкретного користувача
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit'); // Форма для редагування користувача
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update'); // Оновлення користувача
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy'); // Видалення користувача
+
+    // CRUD для курсів
+    Route::get('/courses', [CourseController::class, 'index'])->name('admin.courses.index'); // Список курсів
+    Route::get('/courses/create', [CourseController::class, 'create'])->name('admin.courses.create'); // Форма для створення нового курсу
+    Route::post('/courses', [CourseController::class, 'store'])->name('admin.courses.store'); // Збереження нового курсу
+    Route::get('/courses/{course}', [CourseController::class, 'show'])->name('admin.courses.show'); // Перегляд конкретного курсу
+    Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('admin.courses.edit'); // Форма для редагування курсу
+    Route::put('/courses/{course}', [CourseController::class, 'update'])->name('admin.courses.update'); // Оновлення курсу
+    Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('admin.courses.destroy'); // Видалення курсу
 });
