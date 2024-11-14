@@ -58,4 +58,16 @@ class UserService
             ->findOrFail($id)
             ->update($data);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function destroy($id): bool
+    {
+        if (!User::query()->find($id)) {
+            throw new Exception('User does not exist.');
+        }
+
+        return User::query()->find($id)->delete();
+    }
 }
