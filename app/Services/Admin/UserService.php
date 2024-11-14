@@ -22,4 +22,10 @@ class UserService
             ->paginate(10, ['id', 'name', 'email', 'avatar'])
             ->withQueryString();
     }
+
+    public function store(array $data): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
+    {
+        $data['password'] = Hash::make($data['password']);
+        return User::query()->create($data);
+    }
 }
