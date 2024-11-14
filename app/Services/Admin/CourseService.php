@@ -51,4 +51,16 @@ class CourseService
             ->findOrFail($id)
             ->update($data);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function destroy($id): bool
+    {
+        if (!Course::query()->find($id)) {
+            throw new Exception('Course does not exist.');
+        }
+
+        return Course::query()->find($id)->delete();
+    }
 }

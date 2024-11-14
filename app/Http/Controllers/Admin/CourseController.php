@@ -96,4 +96,23 @@ class CourseController extends Controller
             ], 400);
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $this->courseService->destroy($id);
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 400);
+        }
+    }
 }
