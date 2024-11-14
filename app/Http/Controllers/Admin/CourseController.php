@@ -3,63 +3,38 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Course\StoreRequest;
+use App\Http\Requests\Admin\Course\UpdateRequest;
+use App\Services\Admin\CourseService;
+use Exception;
 
 class CourseController extends Controller
 {
+    protected CourseService $courseService;
+
+    public function __construct(CourseService $courseService)
+    {
+        $this->courseService = $courseService;
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        //
-    }
+        try {
+            $data = $this->courseService->index();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            return response()->json([
+                'success' => true,
+                'data' => $data
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 }

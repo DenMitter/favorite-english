@@ -62,10 +62,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     // CRUD для курсів
     Route::get('/courses', [CourseController::class, 'index'])->name('admin.courses.index');
-    Route::get('/courses/create', [CourseController::class, 'create'])->name('admin.courses.create');
     Route::post('/courses', [CourseController::class, 'store'])->name('admin.courses.store');
     Route::get('/courses/{course}', [CourseController::class, 'show'])->name('admin.courses.show');
-    Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('admin.courses.edit');
     Route::put('/courses/{course}', [CourseController::class, 'update'])->name('admin.courses.update');
     Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('admin.courses.destroy');
 });
