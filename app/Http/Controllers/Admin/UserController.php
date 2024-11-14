@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreRequest;
+use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Models\User;
 use App\Services\Admin\UserService;
 use Exception;
@@ -69,7 +70,7 @@ class UserController extends Controller
 
             return response()->json([
                 'success' => true,
-                'token' => $data
+                'data' => $data
             ]);
         } catch (Exception $exception) {
             return response()->json([
@@ -80,19 +81,22 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id): \Illuminate\Http\JsonResponse
     {
-        //
+        try {
+            $this->userService->update($id, $request->validated());
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 
     /**
