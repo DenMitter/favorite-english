@@ -4,82 +4,93 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+{{--    <link rel="dns-prefetch" href="//fonts.bunny.net">--}}
+{{--    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">--}}
+
+{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">--}}
+{{--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--}}
+{{--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>--}}
+{{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>--}}
+
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <!-- Scripts -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @vite(['resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <div id="app" class="p-5">
+        @yield('content')
+    </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+    <footer>
+        <div class="footer-elements">
+            <div class="footer-content">
+                <div class="footer-mobile">
+                    <div class="footer-content__list">
+                        <div class="list__items footer-list__items">
+                            <img src="emojies/location.svg" alt="location">
+                            <div class="email-adress">
+                                <span>Adress:</span>
+                            </div>
+                        </div>
+                        <div class="list__items footer-list__items">
+                            <img src="emojies/Call.svg" alt="call">
+                            <span>Tel : +9229341037</span>
+                        </div>
+                        <div class="list__items footer-list__items">
+                            <img src="emojies/email.svg" alt="email">
+                            <span>Email: info@onlearn.com</span>
+                        </div>
+                    </div>
+                    <div class="footer-additionally">
+                        <div class="footer-additionally__items">
+                            <p>Categories</p>
+                            <a href="#">Відгуки</a>
+                        </div>
+                        <div class="footer-additionally__items">
+                            <p>Links</p>
+                            <a href="#">Про нас</a>
+                            <a href="#">Блог</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-content__search">
+                    <input class="input-search" placeholder="Email" type="search">
+                    <a href="" class="button footer-content__button">Send</a>
                 </div>
             </div>
-        </nav>
+        </div>
+    </footer>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <!-- Модальне вікно авторизації -->
+    <div id="login" class="modal" data-modal="login">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('login')"><ion-icon name="close-outline"></ion-icon></span>
+            <h2>Вхід</h2>
+            <div class="modal-inputs">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Пароль" required>
+            </div>
+            <div class="modal__bottom-section">
+                <a href="#">Відновити пароль?</a>
+                <a href="" class="button">Увійти</a>
+            </div>
+            <div class="modal-some-information">
+                <p>Або увійдіть через</p>
+                <div class="buttons">
+                    <button class="icon-btn"><img src="icons/apple.png" alt="Apple" width="14"></button>
+                    <button class="icon-btn google-btn"><img src="icons/google.png" alt="Google" width="14"></button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script src="{{ asset('js/index.js') }}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
