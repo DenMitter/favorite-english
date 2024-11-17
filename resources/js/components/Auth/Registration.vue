@@ -8,7 +8,6 @@ const formData = ref({
     password_confirmation: null
 });
 
-// Створюємо реактивні змінні для стану кнопки
 const buttonClass = ref("button");
 const buttonText = ref("Зареєструватись");
 
@@ -19,24 +18,28 @@ const registration = () => {
         password: formData.value.password,
         password_confirmation: formData.value.password_confirmation
     }).then(res => {
-        // Очищуємо дані форми після успішної реєстрації
         formData.value.name = null;
         formData.value.email = null;
         formData.value.password = null;
         formData.value.password_confirmation = null;
 
-        // Змінюємо клас і текст кнопки після успішної реєстрації
         buttonClass.value = "button btn-success";
         buttonText.value = "Успішно";
 
-        // Додатково можна скинути стан кнопки через деякий час
         setTimeout(() => {
-            buttonClass.value = "button"; // Повернути клас до початкового
-            buttonText.value = "Зареєструватись"; // Повернути текст
-        }, 5000); // Наприклад, через 3 секунди
+            buttonClass.value = "button";
+            buttonText.value = "Зареєструватись";
+        }, 5000);
     }).catch(error => {
-        // Обробка помилок
         if (error.response) {
+            buttonClass.value = "button btn-error";
+            buttonText.value = "Помилка";
+
+            setTimeout(() => {
+                buttonClass.value = "button";
+                buttonText.value = "Зареєструватись";
+            }, 5000);
+
             console.error('Помилка сервера:', error.response.data);
         } else if (error.request) {
             console.error('Відсутня відповідь від сервера:', error.request);
@@ -78,5 +81,10 @@ const registration = () => {
 .btn-success {
     background-color: #cff99c;
     color: #000000;
+}
+
+.btn-error {
+    background-color: #eb4e4e;
+    color: #ffffff;
 }
 </style>
