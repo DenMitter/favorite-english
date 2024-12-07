@@ -27,7 +27,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'success' => true,
-                'token' => $token
+                'token' => $token,
             ]);
         } catch (Exception $exception) {
             return response()->json([
@@ -50,7 +50,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $exception->getMessage()
-            ], 400);
+            ], 401);
         }
     }
 

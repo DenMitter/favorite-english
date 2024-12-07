@@ -3,6 +3,17 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+        watch: {
+            usePolling: true,
+        },
+        hmr: {
+            host: 'localhost',
+            protocol: 'ws',
+        },
+    },
     plugins: [
         laravel({
             input: [
@@ -17,12 +28,10 @@ export default defineConfig({
                     base: null,
                     includeAbsolute: false,
                 },
+                compilerOptions: {
+                    isCustomElement: (tag) => tag.startsWith('ion-'),
+                },
             },
         }),
     ],
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.esm-bundler.js',
-        },
-    },
 });

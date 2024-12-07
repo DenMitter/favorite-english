@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendRegistrationEmailJob;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +16,10 @@ class AuthService
 {
     public static function register($data): string
     {
+        if (auth()->check()) {
+            return response()->json(['message' => 'Ви вже авторизовані'], 400);
+        }
+
         $user = new User();
 
         $user->name = $data['name'];
@@ -24,7 +29,7 @@ class AuthService
         $user->save();
 
         // Надсилаємо верифікаційний лист після реєстрації
-        event(new Registered($user));
+        SendRegistrationEmailJob::dispatch($user);
 
         return $user->createToken('token')->plainTextToken;
     }
@@ -52,7 +57,7 @@ class AuthService
         if ($user) {
             $user->tokens()->delete();
         } else {
-            throw new Exception('User is not authenticated');
+            throw new Exception('User is not authenticated | ' . $user);
         }
     }
 

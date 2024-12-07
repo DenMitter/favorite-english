@@ -3,7 +3,7 @@ export default {
     data() {
         return {
             id: '',
-            name: ''
+            avatar: '',
         }
     },
     mounted() {
@@ -16,12 +16,26 @@ export default {
             })
             .then((response) => {
                 this.id = response.data.id
-                this.name = response.data.name
+                this.avatar = response.data.avatar
             })
             .catch((error) => {
-                console.log('Unauthorized: Invalid token');
+                console.log('Unauthorized: Invalid token | ' + token);
             });
     },
+    methods: {
+        logout() {
+            axios
+                .get('/api/auth/logout')
+                .then((response) => {
+                    localStorage.removeItem('authenticated');
+                    localStorage.removeItem('token');
+                    this.$router.push({ name: 'Index' });
+                })
+                .catch((error) => {
+                    console.log('Error logging out:', error);
+                });
+        }
+    }
 }
 </script>
 
@@ -47,8 +61,7 @@ export default {
                     </li>
                     <li class="personal-nav__item">
                         <div class="profile">
-                            <p>{{ this.name }}</p>
-                            <div style="background-image: url('/../emojies/user.svg');"></div>
+                            <div :style="{ backgroundImage: 'url(' + avatar + ')' }" class="avatar"></div>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="#">
@@ -63,12 +76,12 @@ export default {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <router-link :to="{ name: 'AdminHome' }">
                                         <ion-icon name="hammer-outline"></ion-icon>
                                         Адмін панель
-                                    </a>
+                                    </router-link>
                                 </li>
-                                <li><button class="button" href="#">Вийти</button></li>
+                                <li><button class="button" @click="logout">Вийти</button></li>
                             </ul>
                         </div>
                     </li>
