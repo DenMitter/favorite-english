@@ -31,15 +31,15 @@
                 <div class="doings">
                     <div class="doings__item">
                         <h4>Дивись фільми на англійській</h4>
-                        <img src="emojies/eye.svg" alt="Eye">
+                        <img src="/emojies/eye.svg" alt="Eye">
                     </div>
                     <div class="doings__item">
                         <h4>Розмовляй англійською</h4>
-                        <img src="emojies/speak.svg" alt="Speak">
+                        <img src="/emojies/speak.svg" alt="Speak">
                     </div>
                     <div class="doings__item">
                         <h4>Думай англійською</h4>
-                        <img src="emojies/brain.svg" alt="Brain">
+                        <img src="/emojies/brain.svg" alt="Brain">
                     </div>
                 </div>
                 <span class="hr"></span>
@@ -77,15 +77,15 @@
                 <div class="learn-english__list">
                     <ul>
                         <li class="list__items">
-                            <img src="emojies/backhand.svg" alt="backhand">
+                            <img src="/emojies/backhand.svg" alt="backhand">
                             <p>навчайся хоч з ноуту, хоч зі смартфону</p>
                         </li>
                         <li class="list__items">
-                            <img src="emojies/backhand.svg" alt="backhand">
+                            <img src="/emojies/backhand.svg" alt="backhand">
                             <p> вивчай мову з perfect teacher match</p>
                         </li>
                         <li class="list__items">
-                            <img src="emojies/backhand.svg" alt="backhand">
+                            <img src="/emojies/backhand.svg" alt="backhand">
                             <p> додатково прокачуйся на спікінг-клабах, онлайн-курсах й інших активностях</p>
                         </li>
                     </ul>
@@ -108,28 +108,28 @@
         <div class="slider-track">
             <div class="slide">
                 <div class="slide__content">
-                    <img src="emojies/work.svg" alt="work">
+                    <img src="/emojies/work.svg" alt="work">
                     <span class="slide__title"> Англійська для роботи</span>
                 </div>
                 <p class="slide__subtitle">Опануєш ділову лексику, зможеш читати англомовні джерела та легко порозумієшся з іноземними колегами</p>
             </div>
             <div class="slide">
                 <div class="slide__content">
-                    <img src="emojies/work.svg" alt="work">
+                    <img src="/emojies/work.svg" alt="work">
                     <span class="slide__title">Розмовний курс</span>
                 </div>
                 <p class="slide__subtitle">Мінімум теорії, максимум практики та a bunch of topics на будь-який випадок. Все це допоможе швидко подолати мовний бар’єр</p>
             </div>
             <div class="slide">
                 <div class="slide__content">
-                    <img src="emojies/work.svg" alt="work">
+                    <img src="/emojies/work.svg" alt="work">
                     <span class="slide__title">Англійська для початківців</span>
                 </div>
                 <p class="slide__subtitle">База-основа-фундамент, щоб опанувати базову граматику та підтримувати прості побутові розмови</p>
             </div>
             <div class="slide">
                 <div class="slide__content">
-                    <img src="emojies/work.svg" alt="work">
+                    <img src="/emojies/work.svg" alt="work">
                     <span class="slide__title">Англійська для початківців</span>
                 </div>
                 <p class="slide__subtitle">База-основа-фундамент, щоб опанувати базову граматику та підтримувати прості побутові розмови</p>
@@ -141,11 +141,11 @@
             <p class="how-much">How much?</p>
             <ul class="price-lessons__info">
                 <li class="list__items">
-                    <img src="emojies/clock.svg" alt="clock">
+                    <img src="/emojies/clock.svg" alt="clock">
                     <p>Урок – 50 хвилин</p>
                 </li>
                 <li class="list__items">
-                    <img src="emojies/okay.svg" alt="okay">
+                    <img src="/emojies/okay.svg" alt="okay">
                     <p>Є оплата частинами</p>
                 </li>
             </ul>
@@ -153,11 +153,11 @@
                 <p>Окрім занять з тічером, тобі доступні:</p>
                 <ul class="price-list">
                     <li class="list__items">
-                        <img src="emojies/backhand.svg" alt="backhand">
+                        <img src="/emojies/backhand.svg" alt="backhand">
                         <p>Support superheroes, які вирішать будь-яке питання</p>
                     </li>
                     <li class="list__items">
-                        <img src="emojies/backhand.svg" alt="backhand">
+                        <img src="/emojies/backhand.svg" alt="backhand">
                         <p>Спікінг-клаби і self-study-курси — безкоштовно у пакетах від 20 занять</p>
                     </li>
                 </ul>
@@ -174,7 +174,7 @@
                         <p class="price-card__name">Мінімальний</p>
                         <div class="price-card__lessons price-card__lessons__left">
                             <span>5 занять</span>
-                            <img src="emojies/image 12.svg" alt="">
+                            <img src="/emojies/image 12.svg" alt="">
                         </div>
                         <span class="hr price-card__hr"></span>
                         <p class="card-feature">Освіжиш знання та зануришся у процес онлайн‑навчання.</p>
@@ -196,7 +196,7 @@
                     <p class="price-card__name">Популярний</p>
                     <div class="price-card__lessons price-card__lessons__right">
                         <span>10 занять</span>
-                        <img src="emojies/okay.svg" alt="">
+                        <img src="/emojies/okay.svg" alt="">
                     </div>
                     <span class="hr price-card__hr"></span>
                     <p class="card-feature">Заповниш прогалини у grammar skills та зробиш перші кроки до подолання мовного бар’єру.</p>
@@ -217,5 +217,7 @@
 </template>
 
 <style scoped>
-
+.buttons {
+    align-items: center;
+}
 </style>

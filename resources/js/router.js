@@ -1,15 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import IndexPage from './components/IndexPage.vue';
 
-const router = createRouter({
+import Index from '../components/pages/Index.vue';
+
+const routes = [
+    {
+        path: '/',
+        component: Index,
+        name: 'Index',
+    },
+];
+
+const index = createRouter({
     history: createWebHistory(),
-    routes: [
-        {
-            path: '/',
-            component: IndexPage,
-            name: 'index'
-        }
-    ]
+    routes: routes
 });
 
-export default router;
+export default index;
