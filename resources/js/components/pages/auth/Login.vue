@@ -32,7 +32,7 @@ const submit = () => {
     <!-- Модальне вікно авторизації -->
     <div id="login" class="modal" data-modal="login">
         <div class="modal-content">
-            <span class="close">
+            <span class="close" onclick="closeModal('login')">
                 <ion-icon name="close-outline"></ion-icon>
             </span>
             <form @submit.prevent="submit">
