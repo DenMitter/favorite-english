@@ -4,6 +4,7 @@ export default {
         return {
             id: '',
             avatar: '',
+            isAdmin: false,
         }
     },
     mounted() {
@@ -15,12 +16,18 @@ export default {
                 }
             })
             .then((response) => {
-                this.id = response.data.id
-                this.avatar = response.data.avatar
+                this.id = response.data.id;
+                this.avatar = response.data.avatar;
             })
-            .catch((error) => {
-                console.log('Unauthorized: Invalid token | ' + token);
-            });
+            .catch((error) => console.log('Unauthorized: Invalid token'));
+
+        axios
+            .post('/api/admin', {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then((response) => this.isAdmin = !!response.data.success)
     },
     methods: {
         logout() {
@@ -75,7 +82,7 @@ export default {
                                         Оплата
                                     </a>
                                 </li>
-                                <li>
+                                <li v-if="isAdmin">
                                     <router-link :to="{ name: 'AdminHome' }">
                                         <ion-icon name="hammer-outline"></ion-icon>
                                         Адмін панель

@@ -29,7 +29,7 @@ const submit = () => {
     <!-- Модальне вікно реєстрації -->
     <div id="registration" class="modal" data-modal="registration">
         <div class="modal-content">
-            <span class="close">
+            <span class="close" onclick="closeModal('registration')">
                 <ion-icon name="close-outline"></ion-icon>
             </span>
             <form @submit.prevent="submit">

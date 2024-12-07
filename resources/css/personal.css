@@ -10,6 +10,7 @@
     }
 
     .personal-nav__center {
+        top: -100px;
         opacity: 0;
         position: absolute;
         flex-direction: column;
@@ -209,6 +210,7 @@ header {
 }
 .personal-nav__center.active {
     left: 0;
+    top: 0;
     opacity: 1;
     align-items: start;
     z-index: 2;

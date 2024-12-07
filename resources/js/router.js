@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Index from './components/pages/Index.vue';
 import Home from './components/pages/dashboard/Home.vue';
 import AdminHome from './components/pages/admin/Home.vue';
-import NotFound from './components/pages/NotFound.vue'; // Ваш компонент для 404 сторінки
+import NotFound from './components/pages/NotFound.vue';
 
 const routes = [
     {
@@ -21,7 +21,7 @@ const routes = [
         path: '/admin',
         component: AdminHome,
         name: 'AdminHome',
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, requiresAdmin: true },
     },
     {
         path: '/:pathMatch(.*)*',
@@ -35,7 +35,7 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to, from) => {
+router.beforeEach(async (to, from) => {
     const authenticated = localStorage.getItem('authenticated');
 
     if (to.meta.requiresGuest && authenticated) {
@@ -47,6 +47,29 @@ router.beforeEach((to, from) => {
             name: 'Index',
         };
     }
+
+    if (to.meta.requiresAdmin && authenticated) {
+        const isAdmin = await checkAdminStatus();
+        if (!isAdmin) {
+            return {
+                name: 'Home',
+            };
+        }
+    }
 });
+
+const checkAdminStatus = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.post('/api/admin', {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data.success;
+    } catch (error) {
+        return false;
+    }
+};
 
 export default router;

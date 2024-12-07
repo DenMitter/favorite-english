@@ -53,8 +53,7 @@ Route::prefix('dashboard')->group(function () {
 });
 
 // Маршрути для адмінки
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-
+Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
     // Головна сторінка адмінки
     Route::post('/', [AdminController::class, 'index'])->name('admin.router');
 
