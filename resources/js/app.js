@@ -1,12 +1,10 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import router from './router.js';
-import Index from "./components/Index.vue";
-import Registration from "./components/Auth/Registration.vue";
+import App from "./components/App.vue";
 
-const app = createApp({});
+import '../css/app.css';
+import '../css/personal.css';
+import '../css/admin.css';
 
-app.component('index', Index);
-app.component('registration', Registration);
-app.use(router);
-app.mount('#app');
+createApp(App).use(router).mount('#app');

@@ -1,0 +1,44 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/
+      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - '8876:80'
+    container_name: favorite-eng_nginx
+  app:
+    image: php:8.1-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www
+    container_name: favorite-eng_app
+    ports:
+        - "5173:5173"
+  mysql:
+    image: mysql:8.0
+    container_name: favorite-eng_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: h6J2vT37Ti
+      MYSQL_DATABASE: favorite-eng
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: favorite-eng_db
+      MYSQL_ROOT_PASSWORD: h6J2vT37Ti
+    ports:
+      - '8080:80'
+    depends_on:
+      - mysql
+
+volumes:
+  db_data:

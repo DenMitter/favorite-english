@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('auth/register', 'register');
@@ -44,24 +49,24 @@ Route::controller(AuthController::class)->group(function () {
 
 // Маршрути для особистого кабінету
 Route::prefix('dashboard')->group(function () {
-    Route::post('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+    Route::post('/', [DashboardController::class, 'router'])->name('dashboard.router')->middleware('auth');
 });
 
 // Маршрути для адмінки
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     // Головна сторінка адмінки
-    Route::post('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::post('/', [AdminController::class, 'index'])->name('admin.router');
 
     // CRUD для користувачів
-    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users.router');
     Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
     // CRUD для курсів
-    Route::get('/courses', [CourseController::class, 'index'])->name('admin.courses.index');
+    Route::get('/courses', [CourseController::class, 'index'])->name('admin.courses.router');
     Route::post('/courses', [CourseController::class, 'store'])->name('admin.courses.store');
     Route::get('/courses/{course}', [CourseController::class, 'show'])->name('admin.courses.show');
     Route::put('/courses/{course}', [CourseController::class, 'update'])->name('admin.courses.update');

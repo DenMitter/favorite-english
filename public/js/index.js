@@ -1,57 +1,61 @@
-const slider = document.querySelector('.slider');
-const sliderTrack = document.querySelector('.slider-track');
 let isDown = false;
 let startX;
 let scrollLeft;
 
-slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft; // Виправлено: використовуємо scrollLeft для відстеження положення скролу
-});
+window.addEventListener('load', function() {
+    const slider = document.querySelector('.slider');
+    if (slider) {
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
 
-slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
 
-slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
 
-slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
 
-    const x = e.pageX - slider.offsetLeft;
-    const walk = x - startX;
+            const x = e.pageX - slider.offsetLeft;
+            const walk = x - startX;
 
-    slider.scrollLeft = scrollLeft - walk; // Виправлено: змінюємо scrollLeft для прокрутки
-});
+            slider.scrollLeft = scrollLeft - walk;
+        });
 
-// Додамо підтримку сенсорних екранів
+        slider.addEventListener('touchstart', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.touches[0].pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
 
-slider.addEventListener('touchstart', (e) => {
-    isDown = true;
-    slider.classList.add('active');
-    startX = e.touches[0].pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft; // Виправлено для сенсорів
-});
+        slider.addEventListener('touchend', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
 
-slider.addEventListener('touchend', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
+        slider.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
 
-slider.addEventListener('touchmove', (e) => {
-    if (!isDown) return;
+            const x = e.touches[0].pageX - slider.offsetLeft;
+            const walk = x - startX;
 
-    const x = e.touches[0].pageX - slider.offsetLeft;
-    const walk = x - startX;
-
-    slider.scrollLeft = scrollLeft - walk; // Виправлено для сенсорів
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    }
+    else {
+        return 1;
+    }
 });
 
 function toggleMenu() {
@@ -64,26 +68,23 @@ function openModal(modalId) {
     const modal = document.getElementById(modalId);
     const modalContent = modal.querySelector('.modal-content');
 
-    // Встановлюємо стартові значення для відкриття
     modal.style.display = "flex";
-    document.body.style.overflow = "hidden";  // Заблокувати скрол
-    modalContent.style.animation = 'none'; // Скидаємо попередню анімацію
-    modalContent.offsetHeight; // Перезапускаємо анімацію
-    modalContent.style.animation = 'slideUp 0.5s ease'; // Додаємо анімацію відкриття заново
+    document.body.style.overflow = "hidden";
+    modalContent.style.animation = 'none';
+    modalContent.offsetHeight;
+    modalContent.style.animation = 'slideUp 0.5s ease';
 }
 
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     const modalContent = modal.querySelector('.modal-content');
 
-    // Додаємо анімацію закриття
     modalContent.style.animation = 'slideOut 0.5s ease';
 
-    // Після завершення анімації, приховуємо модальне вікно
     setTimeout(() => {
         modal.style.display = "none";
-        document.body.style.overflow = "";  // Розблокувати скрол
-    }, 230); // Встановлюємо таймер на тривалість анімації
+        document.body.style.overflow = "";
+    }, 230);
 }
 
 window.onclick = function(event) {
@@ -97,7 +98,7 @@ window.onclick = function(event) {
 
 window.onkeydown = function(event) {
     if (event.key === 'Escape') {
-        const modals = document.querySelectorAll('.modal'); // Закрити тільки відкрите модальне вікно
+        const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => {
             closeModal(modal.id);
         });
