@@ -1,6 +1,5 @@
 <script setup>
 import '../../../../../public/js/admin.js'
-
 import { onMounted } from 'vue';
 
 import { ref } from 'vue'
@@ -40,7 +39,6 @@ const yearData = [
     { x: new Date('2023-12-31').getTime(), y: 17000 }
 ]
 
-// ініціалізація графіку
 const options = {
     chart: {
         type: 'area',
@@ -71,7 +69,6 @@ const options = {
     }
 }
 
-// створення графіку
 const chart1 = ref(null)
 const renderChart = () => {
     chart1.value = new ApexCharts(document.querySelector("#chart1"), options)
@@ -80,7 +77,6 @@ const renderChart = () => {
 
 onMounted(renderChart)
 
-// Оновлення графіку
 const statUpdate = (period, el) => {
     let data
     switch (period) {
