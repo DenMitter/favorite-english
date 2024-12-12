@@ -11,7 +11,7 @@ services:
     image: php:8.1-fpm
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
     container_name: favorite-eng_app
