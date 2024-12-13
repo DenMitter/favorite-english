@@ -25,6 +25,7 @@ class AuthService
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
+        $user->ip = $data['ip'];
 
         $user->save();
 

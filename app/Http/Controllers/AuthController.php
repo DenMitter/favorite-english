@@ -23,7 +23,10 @@ class AuthController extends Controller
     public function register(RegisterRequest $request): \Illuminate\Http\JsonResponse
     {
         try {
-            $token = $this->authService->register($request->validated());
+            $data = $request->validated();
+            $data['ip'] = $request->ip();
+
+            $token = $this->authService->register($data);
 
             return response()->json([
                 'success' => true,
