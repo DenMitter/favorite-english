@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TrainingRequestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,11 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::controller(TrainingRequestController::class)->group(function () {
+    Route::get('training-request', 'getTrainingRequests');
+    Route::post('training-request', 'store');
 });
 
 Route::controller(AuthController::class)->group(function () {

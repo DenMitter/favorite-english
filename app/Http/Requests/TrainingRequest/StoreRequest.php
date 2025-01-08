@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\TrainingRequest;
 
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LoginRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:training_requests',
+            'level' => 'required|integer',
         ];
     }
 
@@ -34,7 +35,7 @@ class LoginRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'success' => false,
-            'data' => $validator->errors(),
+            'data' => $validator->errors()
         ], 400));
     }
 }
