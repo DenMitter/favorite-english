@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class TrainingRequest extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'color'
+        'email',
+        'level'
     ];
-
-    public function courses(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Course::class);
-    }
 }
