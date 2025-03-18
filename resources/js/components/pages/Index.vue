@@ -47,9 +47,9 @@ onMounted(() => {
                     </div>
                     <div class="buttons">
                         <!-- Якщо токен є, показуємо нікнейм -->
-                        <router-link v-if="token" :to="{ name: 'Home' }" class="button btn-transparrent btn-adaptive">{{ nickname || 'Завантаження...' }}</router-link>
+                        <router-link v-if="token" :to="{ name: 'Home' }" class="button btn-transparent btn-adaptive">{{ nickname || 'Завантаження...' }}</router-link>
                         <a v-if="!token" onclick="openModal('registration')" href="#" class="button btn-adaptive">Зареєструватися</a>
-                        <a v-if="!token" onclick="openModal('login')" href="#" class="button btn-transparrent btn-adaptive">Увійти</a>
+                        <a v-if="!token" onclick="openModal('login')" href="#" class="button btn-transparent btn-adaptive">Увійти</a>
                     </div>
                 </nav>
             </header>
@@ -87,7 +87,7 @@ onMounted(() => {
                                 Чому вчитися з нами
                                 ефективніше, ніж із репетитором
                             </p>
-                            <a href="#" class="button btn-transparrent">Дізнатися</a>
+                            <a href="#" class="button btn-transparent">Дізнатися</a>
                         </div>
                     </div>
                 </div>
@@ -197,12 +197,12 @@ onMounted(() => {
             </div>
             <div class="price-cards">
                 <div class="price-card">
-                    <div class="left-card">
+                    <div>
                         <div class="price-card-content">
                             <p class="price-card__name">Мінімальний</p>
                             <div class="price-card__lessons price-card__lessons__left">
                                 <span>5 занять</span>
-                                <img src="/emojies/image 12.svg" alt="">
+                                <img src="emojies/little.svg" alt="Little emoji">
                             </div>
                             <span class="hr price-card__hr"></span>
                             <p class="card-feature">Освіжиш знання та зануришся у процес онлайн‑навчання.</p>
@@ -219,12 +219,12 @@ onMounted(() => {
                         </div>
                     </div>
                 </div>
-                <div class="price-card right-card">
-                    <div class="price-card-content">
+                <div class="price-card">
+                    <div>
                         <p class="price-card__name">Популярний</p>
-                        <div class="price-card__lessons price-card__lessons__right">
+                        <div class="price-card__lessons bg-blue">
                             <span>10 занять</span>
-                            <img src="/emojies/okay.svg" alt="">
+                            <img src="emojies/okay.svg" alt="Okay emoji">
                         </div>
                         <span class="hr price-card__hr"></span>
                         <p class="card-feature">Заповниш прогалини у grammar skills та зробиш перші кроки до подолання мовного бар’єру.</p>
@@ -237,6 +237,26 @@ onMounted(() => {
                         <div class="price-right price-item">
                             <p>Носій</p>
                             <span>1040 грн</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="price-card price-card-big">
+                    <div>
+                        <p class="price-card__name">Групові заняття</p>
+                        <div class="price-card__lessons bg-blue-transparent">
+                            <span class="black">8 занять</span>
+                            <img src="emojies/blue-fire.png" alt="Blue fire emoji">
+                        </div>
+                        <span class="hr price-card__hr"></span>
+                        <p class="card-feature">8 уроків на місяць у комфортній атмосфері, де ти зможеш практикувати англійську, спілкуватися з однодумцями та поступово долати мовний бар’єр.</p>
+                    </div>
+                    <div class="prices">
+                        <div class="price-left price-item">
+                            <p>Локал</p>
+                            <span>400 грн / місяць</span>
+                        </div>
+                        <div class="price-right price-item">
+                            <a href="" class="button btn-transparent w-auto">Детальніше про курс</a>
                         </div>
                     </div>
                 </div>
