@@ -635,7 +635,7 @@ header {
 .footer-content {
     display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: center !important;
     text-align: center;
 }
 .footer-content img{
