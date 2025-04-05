@@ -1,20 +1,21 @@
-<script>
-export default {
-    methods: {
-        openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const modalContent = modal.querySelector('.modal-content');
+<script setup>
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-            modal.style.display = "flex";
-            document.body.style.overflow = "hidden";
-            modalContent.style.animation = 'none';
-            modalContent.offsetHeight;
-            modalContent.style.animation = 'slideUp 0.5s ease';
-        }
+const route = useRoute();
+
+watch(() => route.path, (newPath) => {
+    if (newPath.startsWith('/dashboard')) {
+        import('../../css/personal.css');
+        const script = document.createElement('script');
+        script.src = '/js/personal.js';
+        script.type = 'text/javascript';
+        script.defer = true;
+        document.body.appendChild(script);
     }
-}
+});
 </script>
 
 <template>
-    <router-view></router-view>
+    <router-view />
 </template>

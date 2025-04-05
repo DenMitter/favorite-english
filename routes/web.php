@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\IndexController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +13,5 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-//Route::get('/', function () {
-//    abort(404);
-//});
 
 Route::get('/{page}', IndexController::class)->where("page", ".*");

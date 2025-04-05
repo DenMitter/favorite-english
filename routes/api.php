@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\TrainingRequestController;
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -24,9 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::controller(TrainingRequestController::class)->group(function () {
-    Route::get('training-request', 'getTrainingRequests');
-    Route::post('training-request', 'store');
+Route::controller(ApplicationController::class)->group(function () {
+    Route::get('applications', 'index');
+    Route::post('applications', 'store');
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -60,20 +60,8 @@ Route::prefix('dashboard')->group(function () {
 
 // Маршрути для адмінки
 Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
-    // Головна сторінка адмінки
     Route::post('/', [AdminController::class, 'index'])->name('admin.router');
 
-    // CRUD для користувачів
-    Route::get('/users', [UserController::class, 'index'])->name('admin.users.router');
-    Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
-    Route::get('/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-
-    // CRUD для курсів
-    Route::get('/courses', [CourseController::class, 'index'])->name('admin.courses.router');
-    Route::post('/courses', [CourseController::class, 'store'])->name('admin.courses.store');
-    Route::get('/courses/{course}', [CourseController::class, 'show'])->name('admin.courses.show');
-    Route::put('/courses/{course}', [CourseController::class, 'update'])->name('admin.courses.update');
-    Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('admin.courses.destroy');
+    Route::resource('users', UserController::class);
+    Route::resource('courses', CourseController::class);
 });
