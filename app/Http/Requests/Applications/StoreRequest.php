@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\TrainingRequest;
+namespace App\Http\Requests\Applications;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,8 +26,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:training_requests',
-            'level' => 'required|integer',
+            'email' => 'required|string|email|max:255|unique:applications',
+            'level' => 'required|in:a1,a2,b1,b2,c1',
         ];
     }
 
