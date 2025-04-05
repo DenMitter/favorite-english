@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\GoogleSheetsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,8 @@ Route::controller(ApplicationController::class)->group(function () {
     Route::get('applications', 'index');
     Route::post('applications', 'store');
 });
+
+Route::post('/google-sheets/add-to-sheet', [GoogleSheetsController::class, 'addToSheet']);
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('auth/register', 'register');
