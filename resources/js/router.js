@@ -10,23 +10,38 @@ const routes = [
         path: '/',
         component: Index,
         name: 'Index',
+        meta: {
+            title: 'Головна сторінка — Favorite English',
+            description: 'Навчайтеся англійської мови з найкращими викладачами онлайн.',
+            keywords: 'англійська, онлайн школа, англійська мова',
+        },
     },
     {
         path: '/dashboard/home',
         component: Home,
         name: 'Home',
-        meta: { requiresAuth: true },
+        meta: {
+            title: 'Особистий кабінет — Favorite English',
+            requiresAuth: true
+        },
     },
     {
         path: '/admin',
         component: AdminHome,
         name: 'AdminHome',
-        meta: { requiresAuth: true, requiresAdmin: true },
+        meta: {
+            title: 'Адмін панель — Favorite English',
+            requiresAuth: true,
+            requiresAdmin: true,
+        },
     },
     {
         path: '/:pathMatch(.*)*',
         component: NotFound,
         name: 'NotFound',
+        meta: {
+            title: 'Сторінка не знайдена — Favorite English',
+        },
     },
 ];
 
@@ -36,6 +51,30 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from) => {
+    if (to.meta.title) {
+        document.title = to.meta.title;
+    }
+
+    if (to.meta.description) {
+        let metaDescription = document.querySelector('meta[name="description"]');
+        if (!metaDescription) {
+            metaDescription = document.createElement('meta');
+            metaDescription.setAttribute('name', 'description');
+            document.head.appendChild(metaDescription);
+        }
+        metaDescription.setAttribute('content', to.meta.description);
+    }
+
+    if (to.meta.keywords) {
+        let metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (!metaKeywords) {
+            metaKeywords = document.createElement('meta');
+            metaKeywords.setAttribute('name', 'keywords');
+            document.head.appendChild(metaKeywords);
+        }
+        metaKeywords.setAttribute('content', to.meta.keywords);
+    }
+
     const authenticated = localStorage.getItem('authenticated');
 
     if (to.meta.requiresGuest && authenticated) {
