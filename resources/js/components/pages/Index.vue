@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Registration from "./auth/Registration.vue";
 import Login from "./auth/Login.vue";
+import SendAnket from "./modals/SendAnket.vue";
 import Footer from "./Footer.vue";
 
 const nickname = ref('');
@@ -32,6 +33,7 @@ onMounted(() => {
     <div class="content">
         <registration></registration>
         <login></login>
+        <send-anket></send-anket>
 
         <div class="container">
             <header>
@@ -80,7 +82,7 @@ onMounted(() => {
                                 Запишись на безкоштовний
                                 пробний урок та отримай бонуси
                             </p>
-                            <a href="#" class="button">Записатися</a>
+                            <a href="#" class="button" onclick="openModal('send-anket')">Записатися</a>
                         </div>
                         <div class="propositions__item">
                             <p>
