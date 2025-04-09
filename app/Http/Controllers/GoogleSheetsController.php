@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GoogleSheets\StoreRequest;
 use App\Services\GoogleSheetsService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -19,23 +20,14 @@ class GoogleSheetsController extends Controller
     /**
      * Додаємо дані у таблицю Google Sheets.
      *
-     * @param Request $request
+     * @param StoreRequest $request
      * @return JsonResponse
      */
-    public function addToSheet(Request $request): JsonResponse
+    public function addToSheet(StoreRequest $request): JsonResponse
     {
         try {
-            $validated = $request->validate([
-                'spreadsheet_id' => 'required|string',
-                'sheet_name' => 'required|string',
-                'data' => 'required|array',
-            ]);
-
-            $spreadsheetId = $validated['spreadsheet_id'];
-            $sheetName = $validated['sheet_name'];
-            $data = $validated['data'];
-
-            $success = $this->googleSheetsService->addDataToSheet($data, $spreadsheetId, $sheetName);
+            $data = $request->validated();
+            $success = $this->googleSheetsService->addDataToSheet($data['data'], $data['spreadsheet_id'], $data['sheet_name']);
 
             if ($success) {
                 return response()->json([
