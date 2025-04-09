@@ -302,6 +302,11 @@ body {
     .learn-english__name {
         font-weight: 500 !important;
     }
+
+    .slide {
+        min-width: 305px !important;
+        padding: 35px !important;
+    }
 }
 @media(max-width:438px){
     .list__items.footer-list__items img {
@@ -376,11 +381,13 @@ body {
         font-size: 21px;
     }
 }
+
 @media(max-height: 700px){
     .close {
         top: -32px !important;
     }
 }
+
 a {
     text-decoration: none;
 }
@@ -808,8 +815,8 @@ main {
 }
 .slide {
     border-radius: 22px;
-    box-shadow: 0px 4px 91.5px -3px #00000021;
-    min-width: 300px;
+    box-shadow: 0px 4px 91.5px -3px #0000000d;
+    min-width: 335px;
     margin: 10px;
     background: #FFFFFF;
     padding: 45px;

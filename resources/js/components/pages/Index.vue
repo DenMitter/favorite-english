@@ -67,7 +67,7 @@ onMounted(() => {
                         </div>
                         <div class="doings__item">
                             <h4>Розмовляй англійською</h4>
-                            <img src="/emojies/speak.svg" alt="Speak">
+                            <img src="/emojies/speak.png" alt="Speak">
                         </div>
                         <div class="doings__item">
                             <h4>Думай англійською</h4>
@@ -138,31 +138,38 @@ onMounted(() => {
             <div class="slider-track">
                 <div class="slide">
                     <div class="slide__content">
-                        <img src="/emojies/work.svg" alt="work">
+                        <img src="/emojies/work.png" alt="Work emoji">
                         <span class="slide__title"> Англійська для роботи</span>
                     </div>
                     <p class="slide__subtitle">Опануєш ділову лексику, зможеш читати англомовні джерела та легко порозумієшся з іноземними колегами</p>
                 </div>
                 <div class="slide">
                     <div class="slide__content">
-                        <img src="/emojies/work.svg" alt="work">
+                        <img src="/emojies/speak.png" alt="Speak emoji">
                         <span class="slide__title">Розмовний курс</span>
                     </div>
                     <p class="slide__subtitle">Мінімум теорії, максимум практики та a bunch of topics на будь-який випадок. Все це допоможе швидко подолати мовний бар’єр</p>
                 </div>
                 <div class="slide">
                     <div class="slide__content">
-                        <img src="/emojies/work.svg" alt="work">
+                        <img src="/emojies/chicken.png" alt="Chicken emoji">
                         <span class="slide__title">Англійська для початківців</span>
                     </div>
                     <p class="slide__subtitle">База-основа-фундамент, щоб опанувати базову граматику та підтримувати прості побутові розмови</p>
                 </div>
                 <div class="slide">
                     <div class="slide__content">
-                        <img src="/emojies/work.svg" alt="work">
-                        <span class="slide__title">Англійська для початківців</span>
+                        <img src="/emojies/chart.png" alt="Chart emoji">
+                        <span class="slide__title">Для кар'єрного зростання</span>
                     </div>
-                    <p class="slide__subtitle">База-основа-фундамент, щоб опанувати базову граматику та підтримувати прості побутові розмови</p>
+                    <p class="slide__subtitle">Розвивай навички для роботи: переговори, презентації та інші професійні ситуації.</p>
+                </div>
+                <div class="slide">
+                    <div class="slide__content">
+                        <img src="/emojies/star.png" alt="Star emoji">
+                        <span class="slide__title">Для саморозвитку</span>
+                    </div>
+                    <p class="slide__subtitle">Розвивай мовні навички через цікаві теми, від культури до науки, для впевненого спілкування на різні теми.</p>
                 </div>
             </div>
         </section>
