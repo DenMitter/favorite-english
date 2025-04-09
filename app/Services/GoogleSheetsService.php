@@ -6,6 +6,7 @@ use Exception;
 use Google_Client;
 use Google_Service_Sheets;
 use Google_Service_Sheets_ValueRange;
+use Illuminate\Support\Facades\Log;
 
 class GoogleSheetsService
 {
@@ -62,7 +63,8 @@ class GoogleSheetsService
             $service->spreadsheets_values->append($spreadsheetId, $range, $body, ['valueInputOption' => 'RAW']);
             return true;
         } catch (Exception $exception) {
-            return false;
+            Log::error('Google Sheets error: ' . $exception->getMessage());
+            throw $exception;
         }
     }
 }
