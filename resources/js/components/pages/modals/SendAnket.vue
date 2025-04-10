@@ -5,7 +5,7 @@ import axios from 'axios'
 const isUnknown = ref(false)
 const fields = ref({
     name: '',
-    email: '',
+    contact: '',
     level: '',
 })
 
@@ -52,8 +52,8 @@ const submit = () => {
                     <input type="text" placeholder="Ім'я" required v-model="fields.name">
                     <span v-if="errors.name" class="error-text">{{ errors.name[0] }}</span>
 
-                    <input type="text" placeholder="Телеграм ( @nickname )" required v-model="fields.email">
-                    <span v-if="errors.email" class="error-text">{{ errors.email[0] }}</span>
+                    <input type="text" placeholder="Телеграм ( @nickname ) або номер телефону" required v-model="fields.contact">
+                    <span v-if="errors.contact" class="error-text">{{ errors.contact[0] }}</span>
 
                     <fieldset v-if="!isUnknown">
                         <div class="button-group" v-for="level in ['A1', 'A2', 'B1', 'B2', 'C1']" :key="level">
