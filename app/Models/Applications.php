@@ -11,7 +11,7 @@ class Applications extends Model
 
     protected $fillable = [
         'name',
-        'email',
+        'contact',
         'level',
     ];
 }
