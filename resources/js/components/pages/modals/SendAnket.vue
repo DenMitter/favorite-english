@@ -21,21 +21,23 @@ const resetUnknown = () => {
     fields.value.level = ''
 }
 
-const submit = () => {
+// перейменовано submit → submitForm для відповідності до директиви
+const submitForm = async () => {
     errors.value = {}
 
-    axios.post('/api/applications', fields.value)
-        .then(() => {
-            alert('Заявка успішно відправлена!')
-        })
-        .catch(error => {
-            if (error.response?.data?.data) {
-                errors.value = error.response.data.data
-            } else {
-                alert('Сталася помилка')
-                console.log(error)
-            }
-        })
+    try {
+        await axios.post('/api/applications', fields.value)
+        // Якщо все ок — нічого не робимо, бо директива сама показує "Готово!"
+    } catch (error) {
+        if (error.response?.data?.data) {
+            errors.value = error.response.data.data
+            throw new Error('Validation error') // щоб директива спіймала помилку
+        } else {
+            alert('Сталася помилка')
+            console.log(error)
+            throw error // пробросимо помилку далі
+        }
+    }
 }
 </script>
 
@@ -46,7 +48,7 @@ const submit = () => {
             <span class="close" onclick="closeModal('send-anket')">
                 <ion-icon name="close-outline"></ion-icon>
             </span>
-            <form @submit.prevent="submit">
+            <form @submit.prevent>
                 <h2>Запишись на безкоштовний пробний урок</h2>
                 <div class="modal-inputs">
                     <input type="text" placeholder="Ім'я" required v-model="fields.name">
@@ -70,7 +72,17 @@ const submit = () => {
                     </div>
 
                     <router-link v-if="isUnknown" :to="{ name: 'AdminHome' }" class="button">Тест ~15хв</router-link>
-                    <button v-else type="submit" class="button">Отримати знижку</button>
+                    <button
+                        v-else
+                        v-loading-button="{
+                          action: submitForm,
+                          loadingText: 'Надсилаємо...',
+                          successText: 'Надісланоs',
+                          errorText: 'Щось пішло не так'
+                        }"
+                        type="submit"
+                        class="button"
+                    >Отримати знижку</button>
                 </div>
             </form>
         </div>

@@ -494,6 +494,13 @@ nav {
     width: auto;
 }
 
+.button.error {
+    background-color: #D2385F !important;
+}
+.button.success {
+    background-color: #64cd38 !important;
+}
+
 .unknown-level {
     color: #385AD2;
 }
