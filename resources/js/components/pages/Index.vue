@@ -174,26 +174,6 @@ onMounted(() => {
             </div>
         </section>
         <section class="price">
-            <div class="price-card price-card-big">
-                    <div>
-                        <p class="price-card__name">Групові заняття</p>
-                        <div class="price-card__lessons bg-blue-transparent">
-                            <span class="black">8 занять</span>
-                            <img src="emojies/blue-fire.png" alt="Blue fire emoji">
-                        </div>
-                        <span class="hr price-card__hr"></span>
-                        <p class="card-feature">8 уроків на місяць у комфортній атмосфері, де ти зможеш практикувати англійську, спілкуватися з однодумцями та поступово долати мовний бар’єр.</p>
-                    </div>
-                    <div class="prices">
-                        <div class="price-left price-item">
-                            <p>Локал</p>
-                            <span>400 грн / місяць</span>
-                        </div>
-                        <div class="price-right price-item">
-                            <a href="" class="button btn-transparent w-auto">Детальніше про курс</a>
-                        </div>
-                    </div>
-                </div>
             <div class="price-content">
                 <p class="how-much">How much?</p>
                 <ul class="price-lessons__info">
@@ -225,6 +205,26 @@ onMounted(() => {
                 </div>
             </div>
             <div class="price-cards">
+                <div class="price-card price-card-big">
+                    <div>
+                        <p class="price-card__name">Групові заняття</p>
+                        <div class="price-card__lessons bg-blue-transparent">
+                            <span class="black">8 занять</span>
+                            <img src="emojies/blue-fire.png" alt="Blue fire emoji">
+                        </div>
+                        <span class="hr price-card__hr"></span>
+                        <p class="card-feature">8 уроків на місяць у комфортній атмосфері, де ти зможеш практикувати англійську, спілкуватися з однодумцями та поступово долати мовний бар’єр.</p>
+                    </div>
+                    <div class="prices">
+                        <div class="price-left price-item">
+                            <p>Локал</p>
+                            <span>400 грн / місяць</span>
+                        </div>
+                        <div class="price-right price-item">
+                            <a href="" class="button btn-transparent w-auto">Детальніше про курс</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="price-card">
                     <div>
                         <div class="price-card-content">
