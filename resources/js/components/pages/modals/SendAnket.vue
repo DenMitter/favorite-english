@@ -21,21 +21,18 @@ const resetUnknown = () => {
     fields.value.level = ''
 }
 
-// перейменовано submit → submitForm для відповідності до директиви
 const submitForm = async () => {
     errors.value = {}
 
     try {
         await axios.post('/api/applications', fields.value)
-        // Якщо все ок — нічого не робимо, бо директива сама показує "Готово!"
     } catch (error) {
         if (error.response?.data?.data) {
             errors.value = error.response.data.data
-            throw new Error('Validation error') // щоб директива спіймала помилку
+            throw new Error('Validation error')
         } else {
-            alert('Сталася помилка')
             console.log(error)
-            throw error // пробросимо помилку далі
+            throw error
         }
     }
 }
@@ -77,7 +74,7 @@ const submitForm = async () => {
                         v-loading-button="{
                           action: submitForm,
                           loadingText: 'Надсилаємо...',
-                          successText: 'Надісланоs',
+                          successText: 'Надіслано',
                           errorText: 'Щось пішло не так'
                         }"
                         type="submit"
