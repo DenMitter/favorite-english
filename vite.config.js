@@ -16,7 +16,7 @@ function getLocalIP() {
 }
 
 const localIP = getLocalIP();
-const isProdNetwork = localIP === '91.238.103.125'; // заміни на свій IP
+const isProdNetwork = localIP === '91.238.103.125';
 
 export default defineConfig({
     server: {

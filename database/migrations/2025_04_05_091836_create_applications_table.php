@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('contact')->unique();
             $table->enum('level', ['A1', 'A2', 'B1', 'B2', 'C1'])->default('A1');
             $table->timestamps();
         });
