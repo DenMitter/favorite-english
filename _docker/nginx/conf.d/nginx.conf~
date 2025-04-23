@@ -1,0 +1,51 @@
+# HTTP - редірект на HTTPS
+server {
+    listen 80;
+    server_name favorite-english.com;
+
+    return 301 https://$host$request_uri;
+}
+
+# HTTPS - основний сервер
+server {
+    listen 443 ssl;
+    server_name favorite-english.com;
+
+    ssl_certificate     /etc/letsencrypt/live/favorite-english.com-0001/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/favorite-english.com-0001/privkey.pe;
+
+    root /var/www/public;
+    index index.php index.html;
+
+    # CORS для статичних файлів
+    location ~* \.(js|css|eot|ttf|woff|woff2|svg)$ {
+        add_header 'Access-Control-Allow-Origin' '*' always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization' always;
+    }
+
+    # Проксі до Vite
+    location /@vite {
+        proxy_pass http://localhost:5173;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Основна маршрутизація
+    location / {
+        try_files $uri /index.php;
+    }
+
+    # PHP
+    location ~ \.php$ {
+        try_files $uri =404;
+        include fastcgi_params;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass favorite-eng_app:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
