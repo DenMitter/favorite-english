@@ -1,12 +1,8 @@
 services:
   nginx:
     image: nginx:latest
-#    volumes:
-#      - ./:/var/www/
-#      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
-#      - ./_docker/ssl:/etc/nginx/ssl:ro
     volumes:
-      - ./public:/var/www/public
+      - ./:/var/www/
       - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
       - ./_docker/ssl:/etc/nginx/ssl:ro
     ports:
@@ -19,8 +15,7 @@ services:
       context: .
       dockerfile: _docker/app/Dockerfile
     volumes:
-#      - ./:/var/www
-      - ./.env:/var/www/.env:ro
+      - ./:/var/www
     container_name: favorite-eng_app
     ports:
         - "5173:5173"
