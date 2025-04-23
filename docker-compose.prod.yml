@@ -4,8 +4,10 @@ services:
     volumes:
       - ./:/var/www/
       - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./_docker/nginx/certs/:/etc/nginx/certs/
     ports:
       - '80:80'
+      - '443:443'
     container_name: favorite-eng_nginx
   app:
     image: php:8.1-fpm
